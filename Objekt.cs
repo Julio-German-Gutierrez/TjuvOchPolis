@@ -49,6 +49,8 @@
     {
         Police = 1,
         Thief = 2,
-        Person = 3
+        Person = 3,
+        ThiefReport = 4,
+        PoliceReport = 5
     }
 }

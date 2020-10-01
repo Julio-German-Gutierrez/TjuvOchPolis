@@ -52,7 +52,8 @@ namespace TjuvOchPolis
             // Zeros are interpreted as empty spaces by the PrintStad() method.
             ClearStadArray();
 
-            // CreateCharacters() create the characters and fill the lists with them.
+            // CreateCharacters() create the characters
+            // and fill the lists with them.
             CreateCharacters(amountPolicemen, amountThieves, amountPeople);
 
             // Start timer to check prison time.
@@ -65,8 +66,7 @@ namespace TjuvOchPolis
             timer.Elapsed += MainCall; // Method to be called every 1 second.
             timer.Start();
 
-            // Simple exit system. Press any key to exit.
-            Console.ReadLine();
+            Console.ReadLine(); // Simple exit system. Press any key to exit.
         }
 
 
@@ -100,16 +100,19 @@ namespace TjuvOchPolis
             {
                 Policeman p = new Policeman();
                 SetCharacter(p);
+                policemen.Add(p);
             }
             for (int i = 0; i < numTjuv; i++)
             {
                 Thief t = new Thief();
                 SetCharacter(t);
+                thieves.Add(t);
             }
             for (int i = 0; i < numMann; i++)
             {
                 Person m = new Person();
                 SetCharacter(m);
+                people.Add(m);
             }
         }// End CreateCharacters()
 
@@ -135,19 +138,10 @@ namespace TjuvOchPolis
                 m.inventory.Add(new Objekt(m.PersonNummer, (int)TypeObjekt.SmartPhone));
                 m.inventory.Add(new Objekt(m.PersonNummer, (int)TypeObjekt.Keys));
                 m.Money = r.Next(0, 5000);
-                people.Add((Person)m);
                 city[y, x] = (int)TypeCitizen.Person;
             }
-            else if (m is Policeman)
-            {
-                policemen.Add((Policeman)m);
-                city[y, x] = (int)TypeCitizen.Police;
-            }
-            else // if (m is Tjuv)
-            {
-                thieves.Add((Thief)m);
-                city[y, x] = (int)TypeCitizen.Thief;
-            }
+            else if (m is Policeman) city[y, x] = (int)TypeCitizen.Police;
+            else city[y, x] = (int)TypeCitizen.Thief; // if (m is Tjuv)
         }
 
 
@@ -188,8 +182,10 @@ namespace TjuvOchPolis
         }
 
 
-        // The sole purpose of WriteToStadArray() is to be able to naturally write de coordinates as X follow by Y,
-        // instead of having to invert it to Y follow by X. Because in stad[,] I interpret the first dimension as a column. Like Y.
+        // The sole purpose of WriteToStadArray() is to be able to naturally
+        // write de coordinates as X follow by Y, instead of having 
+        // to invert it to Y follow by X. Because in stad[,] I interpret
+        // the first dimension as a column. Like Y.
         private static void WriteStadArray(int x, int y, int type)
         {
             city[y, x] = type; // Here the assign is inverted.
@@ -197,18 +193,18 @@ namespace TjuvOchPolis
 
         private static void CheckAndHandleIncidents()
         {
-            foreach (Thief t in thieves)
+            foreach (Thief thief in thieves)
             {
-                foreach (Person m in people)
+                foreach (Person person in people)
                 {
-                    if (t.PositionX == m.PositionX && t.PositionY == m.PositionY && m.inventory.Count != 0)
+                    if (thief.PositionX == person.PositionX && thief.PositionY == person.PositionY && person.inventory.Count != 0)
                     {
                         if (!incidents) incidents = true;
 
                         // The thief steals one random object by using the Tjuv.StealFrom() method.
-                        string objectStolen = t.StealFrom(m);
-                        location.Add(new int[] { t.PositionX, t.PositionY, 4 }); // GPS. Coordinates of the incident.
-                        policeReports.Add($"Tjuven rånade {objectStolen} från medborgare med PID: {m.PersonNummer}");
+                        string objectStolen = thief.StealFrom(person);
+                        location.Add(new int[] { thief.PositionX, thief.PositionY, (int)TypeCitizen.ThiefReport }); // GPS. Coordinates of the incident.
+                        policeReports.Add($"Tjuven rånade {objectStolen} från medborgare med PID: {person.PersonNummer}");
                     }
                 }
             }
@@ -225,7 +221,7 @@ namespace TjuvOchPolis
                         officer.RecoverEverythingFrom(criminal);
                         busToPrison.Add(criminal); // On his way to the Hole! 
 
-                        location.Add(new int[] { officer.PositionX, officer.PositionY, 5 });
+                        location.Add(new int[] { officer.PositionX, officer.PositionY, (int)TypeCitizen.PoliceReport });
                         policeReports.Add($"Polisen fångade en tjuv!!!");
                     }
                 }
@@ -267,7 +263,7 @@ namespace TjuvOchPolis
                     prison.Remove(criminal);
                     thieves.Add(criminal); // Back to the streets.
                     policeReports.Add("En tjuv FRIGAVS från fängelset. Watch OUT!!!");
-                    location.Add(new int[] { criminal.PositionX, criminal.PositionY, 4 });
+                    location.Add(new int[] { criminal.PositionX, criminal.PositionY, (int)TypeCitizen.ThiefReport });
                 }
                 prisonersToReleased.Clear();
             }
