@@ -16,17 +16,17 @@
             string returnType = "";
             switch (Type)
             {
-                case (int)TypeObjekt.Nycklar:
+                case (int)TypeObjekt.Keys:
                     {
                         returnType = "Nycklar";
                         break;
                     }
-                case (int)TypeObjekt.Mobiltelefon:
+                case (int)TypeObjekt.SmartPhone:
                     {
                         returnType = "Mobiltelefon";
                         break;
                     }
-                case (int)TypeObjekt.Klocka:
+                case (int)TypeObjekt.Watch:
                     {
                         returnType = "Klocka";
                         break;
@@ -40,14 +40,14 @@
 
     enum TypeObjekt
     {
-        Nycklar = 0,
-        Mobiltelefon = 1,
-        Klocka = 2
+        Keys = 0,
+        SmartPhone = 1,
+        Watch = 2
     }
 
     enum TypeCitizen
     {
-        Polis = 1,
+        Police = 1,
         Thief = 2,
         Person = 3
     }
