@@ -283,7 +283,7 @@ namespace TjuvOchPolis
 
                 foreach (int[] i in location)
                 {
-                    if (i[2] == 4) city[i[1], i[0]] = (int)TypeCitizen.ThiefReport; // Tjuv
+                    if (i[2] == (int)TypeCitizen.ThiefReport) city[i[1], i[0]] = (int)TypeCitizen.ThiefReport; // Tjuv
                     else city[i[1], i[0]] = (int)TypeCitizen.PoliceReport; // Polis
                 }
             }
