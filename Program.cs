@@ -277,12 +277,14 @@ namespace TjuvOchPolis
 
             if (incidents)
             {
+                // We clear everything to show just the places
+                // where the incidents took place.
                 ClearStadArray();
 
                 foreach (int[] i in location)
                 {
-                    if (i[2] == 4) city[i[1], i[0]] = 4; // Tjuv
-                    else city[i[1], i[0]] = 5; // Polis
+                    if (i[2] == 4) city[i[1], i[0]] = (int)TypeCitizen.ThiefReport; // Tjuv
+                    else city[i[1], i[0]] = (int)TypeCitizen.PoliceReport; // Polis
                 }
             }
 
@@ -291,8 +293,7 @@ namespace TjuvOchPolis
             {
                 for (int j = 0; j < city.GetLength(1); j++)
                 {
-                    int position = city[i, j];
-                    switch (position)
+                    switch (city[i, j])
                     {
                         case 0:
                             {
@@ -382,8 +383,9 @@ namespace TjuvOchPolis
             }
 
 
-            // If collitions were detected, the simulation is stopped for the selected interval "pauseTime".
-            // Giving time to read the collitions.
+            // If collitions were detected, the simulation is stopped
+            // for the selected interval "pauseTime", giving time to read the collitions.
+            // Otherwise we continue with the 1 sec interval MainCall() event.
             if (incidents)
             {
                 timer.Stop();
