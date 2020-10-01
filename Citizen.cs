@@ -28,8 +28,6 @@ namespace TjuvOchPolis
 
     class Thief : Citizen
     {
-        //List<Tjuv> prison;
-        //List<Tjuv> free;
         public long startTimeInPrison;
 
         Random r = new Random();
@@ -75,7 +73,6 @@ namespace TjuvOchPolis
             }
         }
     }
-
 
     class Person : Citizen
     {

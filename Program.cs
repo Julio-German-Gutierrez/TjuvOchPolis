@@ -56,7 +56,7 @@ namespace TjuvOchPolis
             // and fill the lists with them.
             CreateCharacters(amountPolicemen, amountThieves, amountPeople);
 
-            // Start timer to check prison time.
+            // Start stopwatch to check prison time.
             stopwatch = new Stopwatch();
             stopwatch.Start();
 
@@ -156,27 +156,27 @@ namespace TjuvOchPolis
             foreach (Policeman p in policemen) { MoveCharacter(p); }
         }// End of StepForwardStad()
 
-        private static void MoveCharacter(Citizen m)
+        private static void MoveCharacter(Citizen wanderer)
         {
-            m.PositionX += m.DirectionX;
-            if (m.PositionX > CityWidth - 1) m.PositionX = 0;
-            if (m.PositionX < 0) m.PositionX = CityWidth - 1;
+            wanderer.PositionX += wanderer.DirectionX;
+            if (wanderer.PositionX > CityWidth - 1) wanderer.PositionX = 0;
+            if (wanderer.PositionX < 0) wanderer.PositionX = CityWidth - 1;
 
-            m.PositionY += m.DirectionY;
-            if (m.PositionY > CityHeight - 1) m.PositionY = 0;
-            if (m.PositionY < 0) m.PositionY = CityHeight - 1;
+            wanderer.PositionY += wanderer.DirectionY;
+            if (wanderer.PositionY > CityHeight - 1) wanderer.PositionY = 0;
+            if (wanderer.PositionY < 0) wanderer.PositionY = CityHeight - 1;
 
-            if (m is Person)
+            if (wanderer is Person)
             {
-                WriteStadArray(m.PositionX, m.PositionY, (int)TypeCitizen.Person);
+                WriteStadArray(wanderer.PositionX, wanderer.PositionY, (int)TypeCitizen.Person);
             }
-            else if (m is Thief)
+            else if (wanderer is Thief)
             {
-                WriteStadArray(m.PositionX, m.PositionY, (int)TypeCitizen.Thief);
+                WriteStadArray(wanderer.PositionX, wanderer.PositionY, (int)TypeCitizen.Thief);
             }
             else // if(m is Polis)
             {
-                WriteStadArray(m.PositionX, m.PositionY, (int)TypeCitizen.Police);
+                WriteStadArray(wanderer.PositionX, wanderer.PositionY, (int)TypeCitizen.Police);
             }
 
         }
