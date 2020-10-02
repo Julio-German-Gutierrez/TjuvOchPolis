@@ -304,21 +304,18 @@ namespace TjuvOchPolis
                             {
                                 Console.ForegroundColor = ConsoleColor.Blue;
                                 Console.Write("P");
-                                Console.ForegroundColor = ConsoleColor.Gray;
                                 break;
                             }
                         case 2:
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.Write("T");
-                                Console.ForegroundColor = ConsoleColor.Gray;
                                 break;
                             }
                         case 3:
                             {
                                 Console.ForegroundColor = ConsoleColor.Yellow;
                                 Console.Write("M");
-                                Console.ForegroundColor = ConsoleColor.Gray;
                                 break;
                             }
                         case 4:
@@ -326,7 +323,6 @@ namespace TjuvOchPolis
                                 Console.BackgroundColor = ConsoleColor.Red;
                                 Console.ForegroundColor = ConsoleColor.White;
                                 Console.Write("T");
-                                Console.ForegroundColor = ConsoleColor.Gray;
                                 Console.BackgroundColor = ConsoleColor.Black;
                                 break;
                             }
@@ -335,7 +331,6 @@ namespace TjuvOchPolis
                                 Console.BackgroundColor = ConsoleColor.Blue;
                                 Console.ForegroundColor = ConsoleColor.White;
                                 Console.Write("P");
-                                Console.ForegroundColor = ConsoleColor.Gray;
                                 Console.BackgroundColor = ConsoleColor.Black;
                                 break;
                             }
@@ -344,12 +339,13 @@ namespace TjuvOchPolis
                     }
                 }
                 Console.WriteLine(); // WriteLine after each line in stad.
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
 
 
             //Console.WriteLine($"Antal tjuvar: {tjuvar.Count}/{numberThieves}                                    Antal människor: {manniskor.Count}/{numberCitizens}");
             Console.WriteLine("{0,15}{1:00}/{2:00}{3,37}{4:00}{5,35}{6:00}/{7:00}", "Antal tjuvar: ", thieves.Count, amountThieves, "Tjuvar i fängelset: ", prison.Count, "Antal poliser: ", policemen.Count, amountPolicemen);
-
+            Console.WriteLine();
             // We inform the population about the time in prison of the criminals.
             if (prison.Count != 0)
             {
